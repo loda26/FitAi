@@ -5,13 +5,11 @@ programs class
 
 import models
 from models.base_model import BaseModel, Base
-from os import getenv
-import sqlalchemy
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 
 
-class programs(BaseModel, Base):
+class Programs(BaseModel, Base):
     """
     Representation of program class
     """
