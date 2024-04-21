@@ -10,7 +10,7 @@ import sqlalchemy
 from sqlalchemy import Column, String
 
 
-class User(BaseException, Base):
+class User(BaseModel, Base):
     """
     class of user
     """
