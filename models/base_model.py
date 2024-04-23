@@ -23,7 +23,7 @@ class BaseModel:
     Base model class
     """
     if models.storage_t == "db":
-        id = Column(String(60), primary_key=True)
+        id = Column(String(60), primary_key=True, autoincrement=True)
         created_at = Column(DateTime, default=datetime.now)
         updated_at = Column(DateTime, default=datetime.now)
 
