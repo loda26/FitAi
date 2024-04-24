@@ -17,6 +17,7 @@ class Programs(BaseModel, Base):
         __tablename__ = 'programs'
         user_id = Column(String(60), ForeignKey('user.id'), nullable=False)
         program_text = Column(String(1024), nullable=True)
+        client_type = Column(String(60), nullable=True)
         users = relationship("User", backref="user")
     else:
         user_id = ""

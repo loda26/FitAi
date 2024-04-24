@@ -15,6 +15,7 @@ class Article(BaseModel, Base):
         __tablename__ = 'article'
         title = Column(String(1024), nullable=True)
         article_text = Column(String(1024), nullable=True)
+        image_path = Column(String(1024), nullable=True)
     else:
         title = ""
         article_text = ""
