@@ -22,6 +22,15 @@ def service():
     """ Renders index.html """
     return render_template('content/service.html')
 
+@app.route('/register', strict_slashes=False)
+def register():
+    """ Renders index.html """
+    return render_template('content/contact.html')
+
+@app.route('/login', strict_slashes=False)
+def login():
+    """ Renders index.html """
+    return render_template('content/contact.html')
 
 if __name__ == "__main__":
     """ Main Function """
