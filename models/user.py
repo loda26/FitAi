@@ -16,11 +16,11 @@ class User(BaseModel, Base):
         __tablename__ = 'users'
         email = Column(String(128), nullable=False)
         password = Column(String(128), nullable=False)
-        name = Column(String(128), nullable=True)
-        age = Column(String(128), nullable=True)
-        gender = Column(String(128), nullable=True)
-        weight = Column(String(128), nullable=True)
-        height = Column(String(128), nullable=True)
+        name = Column(String(128), nullable=False)
+        age = Column(String(128), nullable=False)
+        gender = Column(String(128), nullable=False)
+        weight = Column(String(128), nullable=False)
+        height = Column(String(128), nullable=False)
     else:
         email = ""
         password = ""
