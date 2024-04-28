@@ -17,8 +17,8 @@
   }
     /* Styling for the green button */
   .AI-green-button {
-      background-color: #4caf50;
-      color: white;
+      background-color: rgb(245, 225, 43);
+      color: rgb(8, 8, 8);
       border: none;
       border-radius: 5px;
       padding: 10px 20px;
