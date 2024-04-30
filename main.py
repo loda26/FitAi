@@ -2,7 +2,8 @@
 """
 Flask App that integrates with AirBnB static HTML Template
 """
-from flask import Flask, render_template
+from flask import Flask, request , render_template
+import requests
 
 app = Flask(__name__)
 
@@ -17,15 +18,38 @@ def about():
     """ Renders index.html """
     return render_template('content/about.html')
 
-@app.route('/service', strict_slashes=False)
+@app.route('/service', methods=['GET', 'POST'], strict_slashes=False)
 def service():
     """ Renders index.html """
     return render_template('content/service.html')
 
-@app.route('/service/generated', strict_slashes=False)
+@app.route('/service/generated', methods=['GET', 'POST'], strict_slashes=False)
 def AI_service():
     """ Renders index.html """
-    return render_template('content/AI_Genrated.html')
+    url = "https://api.openai.com/v1/chat/completions"
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+# prompt = "translate to me to french: 'Hello, how are you?'"
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer your_api_key"
+    }
+    data = {
+        "messages": [
+            {
+                "role": "system",
+                "content": "User: " + prompt
+            }
+        ],
+
+        "max_tokens": 1000,
+        "model": "gpt-3.5-turbo"
+    }
+
+    response = requests.post(url, headers=headers, json=data)
+    response_data = response.json()
+    data = response_data["choices"][0]["message"]["content"]
+    return render_template('content/AI_Genrated.html',data=data)
 
 @app.route('/register', strict_slashes=False)
 def register():

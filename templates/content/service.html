@@ -5,15 +5,10 @@
       <div class="layout_padding2-top">
         <div class="row">
           <div class="col-md-6 ">
-            <form action="">
+            <form action="/service/generated" method="post">
               <div class="contact_form-container">
                 <div>
-                  <div>
-                    <input type="text" placeholder="weight" />
-                  </div>
-                  <div>
-                    <input type="text" placeholder="hight" />
-                  </div>
+                  <input type="text" id="prompt" name="prompt" placeholder="prompt" required><br><br>
                   <div class="mt-5">
                     <button type="submit">
                       Generate
