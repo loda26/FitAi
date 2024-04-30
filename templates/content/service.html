@@ -1,15 +1,35 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-<section class="service_section layout_padding">
+  <section class="contact_section layout_padding">
     <div class="container">
-      <div class="service_container">
-          <div class="AI-yellow-paper">
+      <div class="layout_padding2-top">
+        <div class="row">
+          <div class="col-md-6 ">
             <form action="">
-              <textarea class="AI-text-box" placeholder="Type your text here..."></textarea>
-              <button class="AI-green-button">Save</button>
+              <div class="contact_form-container">
+                <div>
+                  <div>
+                    <input type="text" placeholder="weight" />
+                  </div>
+                  <div>
+                    <input type="text" placeholder="hight" />
+                  </div>
+                  <div class="mt-5">
+                    <button type="submit">
+                      Generate
+                    </button>
+                  </div>
+                </div>
+              </div>
             </form>
+          </div>
+          <div class="col-md-6">
+            <div class="img-box">
+                <img src="{{ url_for('static', filename='images/about-img.png') }}" alt="">
+              </div>
           </div>
         </div>
       </div>
+    </div>
   </section>
-  {% endblock %}
+{% endblock %}

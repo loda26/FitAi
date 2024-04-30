@@ -22,6 +22,11 @@ def service():
     """ Renders index.html """
     return render_template('content/service.html')
 
+@app.route('/service/generated', strict_slashes=False)
+def AI_service():
+    """ Renders index.html """
+    return render_template('content/AI_Genrated.html')
+
 @app.route('/register', strict_slashes=False)
 def register():
     """ Renders index.html """
