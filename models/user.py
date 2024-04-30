@@ -3,33 +3,20 @@
 class user
 """
 
-import models
+from sqlalchemy import create_engine, Column, String
+from sqlalchemy.orm import sessionmaker
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String
 
 
-class User(BaseModel, Base):
-    """
-    class of user
-    """
-    if models.storage_t == "db":
-        __tablename__ = 'users'
-        email = Column(String(128), nullable=False)
-        password = Column(String(128), nullable=False)
-        name = Column(String(128), nullable=False)
-        age = Column(String(128), nullable=False)
-        gender = Column(String(128), nullable=False)
-        weight = Column(String(128), nullable=False)
-        height = Column(String(128), nullable=False)
-    else:
-        email = ""
-        password = ""
-        name = ""
-        age = ""
-        gender = ""
-        weight = ""
-        height = ""
+class Users(BaseModel, Base):
+    __tablename__ = 'users'
 
-    def __init__(self, *args, **kwargs):
-        """initializes user"""
-        super().__init__(*args, **kwargs)
+    name = Column(String(80), nullable=False)
+    email = Column(String(80), nullable=False)
+    password = Column(String(80), nullable=False)
+
+
+engine = create_engine("sqlite:///lodadb.db", echo=True)
+Base.metadata.create_all(bind=engine)
+
+Session = sessionmaker(bind=engine)
