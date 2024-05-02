@@ -4,7 +4,8 @@ programs class
 """
 
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, ForeignKey
+from sqlalchemy import Column, String, ForeignKey, create_engine
+from sqlalchemy.orm import sessionmaker
 
 
 class Programs(BaseModel, Base):
@@ -13,3 +14,8 @@ class Programs(BaseModel, Base):
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
     program_text = Column(String(1024), nullable=True)
     client_type = Column(String(60), nullable=True)
+
+engine = create_engine("sqlite:///lodadb.db", echo=True)
+Base.metadata.create_all(bind=engine)
+
+Session = sessionmaker(bind=engine)

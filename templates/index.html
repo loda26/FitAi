@@ -25,7 +25,7 @@
         <ul>
             {% for user in users %}
                 <li>
-                    {{ user.id }} - {{ user.name }} - {{ user.email }} - {{ user.created_at }} - {{ user.updated_at }}
+                    {{ user.id }} - {{ user.name }} - {{ user.email }}
                     <button class="delete-btn" data-user-id="{{ user.id }}">Delete</button>
                 </li>
             {% endfor %}
