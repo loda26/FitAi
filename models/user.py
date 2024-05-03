@@ -14,6 +14,8 @@ class Users(BaseModel, Base):
     name = Column(String(80), nullable=False)
     email = Column(String(80), nullable=False)
     password = Column(String(80), nullable=False)
+    age = Column(String(80), nullable=False)
+    gender = Column(String(80), nullable=False)
 
 
 engine = create_engine("sqlite:///lodadb.db", echo=True)
