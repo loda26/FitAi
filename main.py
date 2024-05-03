@@ -2,12 +2,12 @@
 """
 Flask App that integrates with AirBnB static HTML Template
 """
-from flask import Flask, request , render_template, redirect
+from flask import Flask, request , render_template, redirect, url_for
 import requests
 from models.user import Users, Session
 
 app = Flask(__name__)
-
+session = Session()
 
 @app.route('/', strict_slashes=False)
 def home():
@@ -52,45 +52,32 @@ def AI_service():
     data = response_data["choices"][0]["message"]["content"]
     return render_template('content/AI_Genrated.html',data=data)
 
-@app.route('/register', strict_slashes=False)
+@app.route('/register', methods=['GET', 'POST'], strict_slashes=False)
 def register():
-    """ Renders index.html """
-    return render_template('content/register.html')
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        password = request.form['password']
+        conf_password = request.form['conf_password']
+        age = request.form['age']
+        gender = request.form['gender']
+
+        if password != conf_password:
+            return "Password and confirmation password do not match. Please try again."
+
+        new_user = Users(name=name, email=email, password=password, conf_password=conf_password, age=age, gender=gender)
+        session.add(new_user)
+        session.commit()
+
+        return render_template('content/login.html')
+    
+    if request.method == 'GET':
+        return render_template('content/register.html')
 
 @app.route('/login', strict_slashes=False)
 def login():
     """ Renders index.html """
     return render_template('content/login.html')
-
-
-# loda's code
-Session = Session()
-@app.route('/loda')
-def index():
-    users = Session.query(Users).all()
-    return render_template('index.html', users=users)
-
-@app.route('/loda/submit', methods=['POST'])
-def submit():
-    name = request.form['name']
-    email = request.form['email']
-    password = request.form['password']
-
-    user = Users(name=name, email=email, password=password)
-    Session.add(user)
-    Session.commit()
-
-    return redirect('/loda')
-
-@app.route('/loda/delete/<int:user_id>', methods=['DELETE'])
-def delete_user(user_id):
-    user = Session.query(Users).filter_by(id=user_id).first()
-    if user:
-        Session.delete(user)
-        Session.commit()
-        return "User deleted successfully", 200
-    else:
-        return "User not found", 404
 
 
 if __name__ == "__main__":

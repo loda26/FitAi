@@ -8,29 +8,31 @@
             <form action="">
               <div class="contact_form-container">
                 <div>
-                  <div>
-                    <input type="text" placeholder="Name" />
-                  </div>
-                  <div>
-                    <input type="email" placeholder="Email" />
-                  </div>
-                  <div>
-                    <input type="text" placeholder="Age" />
-                  </div>
-                  <div>
-                    <input type="text" placeholder="Gender" />
-                  </div>
-                  <div>
-                    <input type="text" placeholder="Password" />
-                  </div>
-                  <div>
-                    <input type="text" placeholder="Confirm Password" />
-                  </div>
-                  <div class="">
-                    <button type="submit">
-                      Register
-                    </button>
-                  </div>
+                  <form action="/register" method="POST">
+                    <div>
+                        <input type="text" placeholder="Name" name="name" />
+                    </div>
+                    <div>
+                        <input type="email" placeholder="Email" name="email" />
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Age" name="age" />
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Gender" name="gender" />
+                    </div>
+                    <div>
+                        <input type="password" placeholder="Password" name="password" />
+                    </div>
+                    <div>
+                        <input type="password" placeholder="Confirm Password" name="conf_password" />
+                    </div>
+                    <div class="">
+                        <button type="submit">
+                            Register
+                        </button>
+                    </div>
+                  </form>                
                 </div>
               </div>
             </form>
