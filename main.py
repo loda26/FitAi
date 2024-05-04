@@ -52,8 +52,12 @@ def AI_service():
     data = response_data["choices"][0]["message"]["content"]
     return render_template('content/AI_Genrated.html',data=data)
 
-@app.route('/register', methods=['GET', 'POST'], strict_slashes=False)
-def register():
+@app.route('/register', strict_slashes=False)
+def register():    
+    return render_template('content/register.html')
+    
+@app.route('/register/submit', methods=['GET', 'POST'], strict_slashes=False)
+def submit():
     if request.method == 'POST':
         name = request.form['name']
         email = request.form['email']
