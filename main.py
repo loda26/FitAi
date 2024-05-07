@@ -2,13 +2,15 @@
 """
 Flask App that integrates with AirBnB static HTML Template
 """
-from flask import Flask, request , render_template
+from flask import Flask, request , render_template, session
 import requests
 from models.user import Users, Session
 
 app = Flask(__name__)
 mysession = Session()
+app.secret_key = 'thisissecret'
 
+@app.route('/home', strict_slashes=False)
 @app.route('/', strict_slashes=False)
 def home():
     return render_template('content/home.html')
@@ -26,7 +28,7 @@ def AI_service():
     url = "https://api.openai.com/v1/chat/completions"
     if request.method == 'POST':
         prompt = request.form['prompt']
-# prompt = "translate to me to french: 'Hello, how are you?'"
+
     headers = {
         "Content-Type": "application/json",
         "Authorization": "Bearer your_api_key"
@@ -74,10 +76,23 @@ def submit():
     if request.method == 'GET':
         return render_template('content/register.html')
 
-@app.route('/login', strict_slashes=False)
+@app.route('/login', methods=['GET', 'POST'], strict_slashes=False)
 def login():
-    """ Renders index.html """
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        user = mysession.query(Users).filter_by(email=email, password=password).first()
+
+        if user:
+            session['user_id'] = user.id
+            return render_template('content/home.html')
+        
+        return "Invalid email or password. Please try again."
+    
     return render_template('content/login.html')
+
+
 
 
 if __name__ == "__main__":
