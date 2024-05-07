@@ -13,9 +13,6 @@ class Programs(BaseModel, Base):
 
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
     program_text = Column(String(1024), nullable=True)
-    client_type = Column(String(60), nullable=True)
-    weight = Column(String(80), nullable=False)
-    height = Column(String(80), nullable=False)
 
 engine = create_engine("sqlite:///lodadb.db", echo=True)
 Base.metadata.create_all(bind=engine)
