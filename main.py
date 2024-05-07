@@ -2,31 +2,27 @@
 """
 Flask App that integrates with AirBnB static HTML Template
 """
-from flask import Flask, request , render_template, redirect, url_for
+from flask import Flask, request , render_template
 import requests
 from models.user import Users, Session
 
 app = Flask(__name__)
-session = Session()
+mysession = Session()
 
 @app.route('/', strict_slashes=False)
 def home():
-    """ Renders index.html """
     return render_template('content/home.html')
 
 @app.route('/about', strict_slashes=False)
 def about():
-    """ Renders index.html """
     return render_template('content/about.html')
 
 @app.route('/service', methods=['GET', 'POST'], strict_slashes=False)
 def service():
-    """ Renders index.html """
     return render_template('content/service.html')
 
 @app.route('/service/generated', methods=['GET', 'POST'], strict_slashes=False)
 def AI_service():
-    """ Renders index.html """
     url = "https://api.openai.com/v1/chat/completions"
     if request.method == 'POST':
         prompt = request.form['prompt']
@@ -70,8 +66,8 @@ def submit():
             return "Password and confirmation password do not match. Please try again."
 
         new_user = Users(name=name, email=email, password=password, conf_password=conf_password, age=age, gender=gender)
-        session.add(new_user)
-        session.commit()
+        mysession.add(new_user)
+        mysession.commit()
 
         return render_template('content/login.html')
     
