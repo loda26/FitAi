@@ -2,9 +2,10 @@
 """
 Flask App that integrates with AirBnB static HTML Template
 """
-from flask import Flask, request , render_template, session
+from flask import Flask, request , render_template, session,redirect,url_for
 import requests
 from models.user import Users, Session
+from models.programs import Programs
 
 app = Flask(__name__)
 mysession = Session()
@@ -49,6 +50,17 @@ def AI_service():
     response_data = response.json()
     data = response_data["choices"][0]["message"]["content"]
     return render_template('content/AI_Genrated.html',data=data)
+
+@app.route('/service/save', methods=['GET', 'POST'], strict_slashes=False)
+def service_save():
+    if request.method == 'POST':
+        user_id = request.form['user_id']
+        program_text = request.form['program_text']
+    
+    new_program = Programs(user_id=user_id, program_text=program_text)
+    mysession.add(new_program)
+    mysession.commit()
+    return render_template('content/home.html')
 
 @app.route('/register', strict_slashes=False)
 def register():    
