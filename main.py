@@ -32,7 +32,7 @@ def AI_service():
 
     headers = {
         "Content-Type": "application/json",
-        "Authorization": "Bearer your_api_key"
+        "Authorization": "Bearer your_api_key_here"
     }
     data = {
         "messages": [
@@ -60,7 +60,7 @@ def service_save():
     new_program = Programs(user_id=user_id, program_text=program_text)
     mysession.add(new_program)
     mysession.commit()
-    return render_template('content/home.html')
+    return redirect(url_for('service'))
 
 @app.route('/register', strict_slashes=False)
 def register():    
